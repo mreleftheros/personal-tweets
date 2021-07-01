@@ -79,6 +79,26 @@
       list-style: none;
       width: 80%;
       margin: 1rem auto 0;
+
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(0, 0, 0, .2);
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        font-size: 2rem;
+
+        &__tweet {
+          color: #fff;
+          text-shadow: 1px 1px 3px #000;
+        }
+
+        &__trash {
+          color: crimson;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

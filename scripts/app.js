@@ -1,4 +1,5 @@
 const tweetsForm = document.getElementById("tweetsForm");
+const tweetsList = document.getElementById("tweetsList");
 let tweets;
 
 // check localStorage for tweets item and assign it to tweets variable
@@ -14,13 +15,40 @@ const addTweet = e => {
   if(newTweet) {
     newTweet = newTweet.trim();
 
-    tweets.push(newTweet); // add to array
-    localStorage.setItem("tweets", JSON.stringify(tweets)) // add to localStorage
+    tweets.push(newTweet); // add item to array
+    localStorage.setItem("tweets", JSON.stringify(tweets)) // add array to localStorage
   }
-  
+
   e.target.reset();
 }
 
+const displayTweet = tweet => {
+  // create Elements
+  const liElement = document.createElement("li");
+  const tweetElement = document.createElement("span");
+  const trashElement = document.createElement("span");
+
+  // give classes and attributes
+  liElement.classList.add("main__display__tweets__item");
+  tweetElement.classList.add("main__display__tweets__item__tweet");
+  trashElement.className = "main__display__tweets__item__trash trash";
+
+  // give text content
+  tweetElement.textContent = tweet;
+  trashElement.textContent = "X";
+
+  // append children
+  liElement.appendChild(tweetElement);
+  liElement.appendChild(trashElement);
+  tweetsList.appendChild(liElement);
+};
+
+const displayTweets = () => {
+  updateFromLocalStorage();
+
+  tweets.forEach(tweet => displayTweet(tweet));
+};
+
 // events
-window.addEventListener("DOMContentLoaded", updateFromLocalStorage);
+window.addEventListener("DOMContentLoaded", displayTweets);
 tweetsForm.addEventListener("submit", addTweet);
